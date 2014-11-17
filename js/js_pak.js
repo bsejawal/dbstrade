@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
     $('#carousel').carouFredSel({
         responsive: true,
         items: {
@@ -17,7 +17,7 @@ $(function () {
 
 function menu_list_on() {
     $('#product').css({
-        'color': '#fff'
+        'background': '#003399'
     });
     $('.menu_list').css({
         "display": "block"
@@ -27,7 +27,7 @@ function menu_list_on() {
 
 function menu_list_off() {
     $('#product').css({
-        'color': '#f00'
+        'background': 'none'
     });
     $('.menu_list').css({
         "display": "none"

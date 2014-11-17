@@ -1,18 +1,16 @@
 *{
-    /*margin: 0px;*/
     padding: 0px;
-    /*border: 0px;*/
     font-size: 12px;
 }
 
 body{
-    background: #aaa;
+    background: #fff;
 }
 
 .site_center{
     width: 1000px;
     margin: 0 auto;
-    background: #eee;
+    background: rgba(0,150,150,0.7);
 }
 
 .wrap_site{
@@ -52,6 +50,7 @@ body{
 }
 
 .social_med_link{
+    border-radius: 20px;
     height: 40px;
     width: 40px;
     display: table-cell;
@@ -67,16 +66,17 @@ body{
 }
 
 .navbar_override{
-    background: #000;
+    background: #ff6600;
+    border: none;
     height: 30px;
-    padding: 0px 10px;
+    padding: 0px 0px;
     margin: 0 auto;
 }
 
 .navbar_override ul{
     list-style: none;
-    float: left;
-    padding-top: 15.5px;
+    float: right;
+    padding-top: 17px;
 }
 
 .navbar_override li{
@@ -85,16 +85,14 @@ body{
 }
 
 .nav_link,.nav_link:visited,.nav_link:link{
-    color: #f00;
+    color: #fff;
     padding: 18px 30px;
     border: none;
     text-decoration: none;
-    border-right: 1px solid #666;
 }
 
 .nav_link:hover{
-    color:#fff;
-    text-decoration: none;
+    background: #003399;
 }
 
 #active{
@@ -105,8 +103,8 @@ body{
 
 .input_box{
     width: 300px;
-    float: right;
-    margin: 7px 0px 0px 0px;
+    float: left;
+    margin-top: 8px;
 }
 
 .form_override{
@@ -115,18 +113,19 @@ body{
 
 .btn_override{
     border: 1px solid #555;
-    background: #777;
-    color: #ccc;
+    /*background: #003399;*/
+    background: rgba(0,150,150,1);
+    color: #fff;
 }
 
 .btn_override:hover{
     border: 1px solid #555;
-    background: #ccc;
+    background: rgba(0,150,150,0.9);
 }
 
 .menu_list{
     border-top: 1px solid #ccc;
-    height:auto;
+    height: auto;
     padding: 0px;
     width: 150px;
     display: none;
@@ -134,7 +133,7 @@ body{
     color:#fff;
     margin-top: 15px;
     z-index: 1;
-    background:#000;
+    background: #003399;
 }
 
 .menu_list div{
@@ -142,7 +141,7 @@ body{
 }
 
 .menu_list a{
-    color: #f00;
+    color: #fff;
     display: block;
     width: 150px;
     padding: 10px 0px 10px 20px;
@@ -152,21 +151,20 @@ body{
 }
 
 .menu_list a:hover{
-    color:#fff;
-    background: #777;
+    background: #ff6600;
 }
 
 .sidebar_wrap{
     margin-top: 20px;
     width: 250px;
     height: 1000px;
-    float: left;
+    float: right;
     display: table-cell;
 }
 
 .headings{
     border-radius: 5px 5px 0px 0px;
-    background: #d00;
+    background: #FF6600;
     padding: 8px;
     font-weight: bold;
     color: #fff;
@@ -177,36 +175,28 @@ body{
     margin-bottom: 45px;
 }
 
-
 .sidebar_buttons{
     font-size: 15px;
+    color: #000;
     padding: 10px;
-    border-bottom: 1px dotted black;
+    background: #eef;
+    border-bottom: 1px solid black;
 }
 
 .sidebar_buttons a{
     color: #000;
 }
 
-.arrow-left {
-    width: 0; 
-    height: 0; 
-    border-top: 3px solid transparent;
-    border-bottom: 3px solid transparent; 
-    border-right: 3px solid blue; 
-}
-
 .content_wrap{
-    margin: 20px 0px 0px 20px;
+    margin: 20px 20px 0px 0px;
     width: 700px;
-    /*height: 1000px;*/
     float: left;
     display: table-cell;
 }
 
 .slideshow{
     width: 700px;
-    border: 3px solid rgba(0,0,0,0.7);
+    border: 3px solid rgba(0,80,150,0.7);
     height: 306px;
 }
 
@@ -217,11 +207,11 @@ body{
 
 #carousel img {
     width: 694px;
-    height: 400px;
+    height: 300px;
 }
 
 #pager {
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,80,150,0.7);
     text-align: center;
     width: 694px;
     padding: 2px;
@@ -230,7 +220,7 @@ body{
 }
 
 #pager a.selected span {
-    background: #f00;
+    background: #ff6600;
 }
 #pager a {
     display: inline-block;
@@ -252,13 +242,11 @@ body{
     text-align: justify;
     -ms-text-justify: distribute-all-lines;
     text-justify: distribute-all-lines;
-    /*border: 1px solid black;*/
-    /*text-align: justify;*/
 }
 
 .featured_products h3{
     padding-bottom: 15px;
-    border-bottom: 1px solid #aaa;
+    border-bottom: 1px solid #fff;
 }
 
 .panel_override{
@@ -273,7 +261,7 @@ body{
 }
 
 .panel-body_override{
-    border-top: 1px dotted #aaa;
+    border-top: 1px solid #aaa;
     width: 190px;
     margin: 0 auto;
     text-align: center;
@@ -281,7 +269,6 @@ body{
 }
 
 .image_area{
-    /*border: 1px solid black;*/
     margin-top: 10px;
     height: 120px;
 }
@@ -290,18 +277,17 @@ body{
     text-align: center;
     height: 75px;
     padding: 10px 0px;
-    /*border: 1px solid black;*/
 }
 
 .pnl_btn_override{
     margin-top: 10px;
-    background: #d00;
+    background: #ff6600;
     font-weight: bold;
     color: #fff;
 }
 
 .pnl_btn_override:hover{
-    background: #000;
+    background: #003399;
     color: #fff;
 }
 
@@ -309,26 +295,47 @@ body{
     width: 100%;
     display: inline-block;
     font-size: 0;
-    line-height: 0
+    line-height: 0;
+}
+
+.btn_override_more{
+    float: right;
+    border-radius: 0px;
+    border: none;
+    margin-bottom: 15px;
+    background: #ff6600;
+    font-weight: bold;
+    color: #fff;
+}
+
+.btn_override_more:hover{
+    background: #003399;
+    color: #fff;
+}
+
+.btn_override_more span{
+    font-size: 17px;
+    font-weight: normal;
 }
 
 
 .footer{
-    border-top: 1px solid #aaa;
+    border-top: 1px solid #fff;
     width: 100%;
-    padding: 10px;
-    height: 100px;
+    padding: 20px;
+    height: 80px;
     display: table-cell;
     float: left;
+    text-align: center;
+    color: #000;
 }
 
 .footer_links{
     height: 25px;
-    /*border: 1px solid black;*/
 }
 
 .footer_links a{
-    color: #333;
+    color: #000;
 }
 
 

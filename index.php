@@ -18,15 +18,20 @@
                         <div class="social_med_heading">Follow us on:</div>
                         <a href="#"><img src="images/fb.png" class="social_med_link" /></a>
                         <a href="#"><img src="images/tw.png" class="social_med_link" /></a>
-                        <a href="#"><img src="images/gp.png" class="social_med_link" /></a>
-                        <a href="#"><img src="images/yahoo.png" class="social_med_link" /></a>
+                        <a href="#"><img src="images/in.png" class="social_med_link" /></a>
                     </div>
                 </div>
                 <nav class="navbar navbar_override navbar-inverse" role="navigation">
+                    <div class="col-lg-6 input_box">
+                        <div class="input-group">
+                            <input type="text" class="form-control form_override">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn_override" type="button">Go</button>
+                            </span>
+                        </div>
+                    </div>
                     <ul>
                         <li><a href="#" class="nav_link">HOME</a></li>
-                        <li><a href="#" class="nav_link">ABOUT US</a></li>
-                        <li><a href="#" class="nav_link">CONTACT</a></li>
                         <li><a href="#" onmouseover="javascript:menu_list_on()" onmouseout="javascript:menu_list_off()" class="nav_link" id="product">PRODUCTS</a>
                             <div class="menu_list" onmouseover="javascript:menu_list_on()" onmouseout="javascript:menu_list_off()">
                                 <div><a href="#">Herbs</a></div>   
@@ -36,15 +41,9 @@
                                 <div><a href="#">Spices</a></div> 
                             </div>
                         </li>
+                        <li><a href="#" class="nav_link">ABOUT US</a></li>
+                        <li><a href="#" class="nav_link">CONTACT</a></li>
                     </ul>
-                    <div class="col-lg-6 input_box">
-                        <div class="input-group">
-                            <input type="text" class="form-control form_override">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default btn_override" type="button">Go</button>
-                            </span>
-                        </div>
-                    </div>
                 </nav>
                 <div class="sidebar_wrap">
                     <div class="headings">CATEGORIES</div>
@@ -59,8 +58,8 @@
                     <div class="headings">INFORMATIONS</div>
                     <div class="sidebar_cont">
                         <div class="sidebar_buttons">&raquo; <a href="#">Terms and Conditions</a></div>
-                        <div class="sidebar_buttons">&raquo; <a href="#">Delivery</a></div>
-                        <div class="sidebar_buttons">&raquo; <a href="#">Payment</a></div>
+                        <div class="sidebar_buttons">&raquo; <a href="#">Delivery Method</a></div>
+                        <div class="sidebar_buttons">&raquo; <a href="#">Payment Method</a></div>
                         <div class="sidebar_buttons">&raquo; <a href="#">Press</a></div>
                     </div>
                 </div>
@@ -78,13 +77,13 @@
                         </div>
                     </div>
                     <div class="featured_products">
-                        <h3>Featured Products</h3>
+                        <h3>Latest Products</h3>
                         <div class="panel panel-default panel_override">
                             <div class="pnl_heading"><h4>Heading 1</h4></div>
                             <div class="panel-body panel-body_override">
                                 <div class="image_area"><img src="images/uploads/thumb/th1.jpg" width="120" height="120"></div>
                                 <div class="prod_cont">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                                <button type="button" class="btn btn-default pnl_btn_override">Add to Cart</button>
+                                <button type="button" class="btn btn-default pnl_btn_override">Book Product</button>
                             </div>
                         </div>
                         <div class="panel panel-default panel_override">
@@ -92,7 +91,7 @@
                             <div class="panel-body panel-body_override">
                                 <div class="image_area"><img src="images/uploads/thumb/th2.jpg" width="120" height="120"></div>
                                 <div class="prod_cont">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                                <button type="button" class="btn btn-default pnl_btn_override">Add to Cart</button>
+                                <button type="button" class="btn btn-default pnl_btn_override">Book Product</button>
                             </div>
                         </div>
                         <div class="panel panel-default panel_override">
@@ -100,7 +99,7 @@
                             <div class="panel-body panel-body_override">
                                 <div class="image_area"><img src="images/uploads/thumb/th3.png" width="120" height="120"></div>
                                 <div class="prod_cont">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                                <button type="button" class="btn btn-default pnl_btn_override">Add to Cart</button>
+                                <button type="button" class="btn btn-default pnl_btn_override">Book Product</button>
                             </div>
                         </div>
                         <div class="panel panel-default panel_override">
@@ -108,7 +107,7 @@
                             <div class="panel-body panel-body_override">
                                 <div class="image_area"><img src="images/uploads/thumb/th1.jpg" width="120" height="120"></div>
                                 <div class="prod_cont">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                                <button type="button" class="btn btn-default pnl_btn_override">Add to Cart</button>
+                                <button type="button" class="btn btn-default pnl_btn_override">Book Product</button>
                             </div>
                         </div>
                         <div class="panel panel-default panel_override">
@@ -116,7 +115,7 @@
                             <div class="panel-body panel-body_override">
                                 <div class="image_area"><img src="images/uploads/thumb/th2.jpg" width="120" height="120"></div>
                                 <div class="prod_cont">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                                <button type="button" class="btn btn-default pnl_btn_override">Add to Cart</button>
+                                <button type="button" class="btn btn-default pnl_btn_override">Book Product</button>
                             </div>
                         </div>
                         <div class="panel panel-default panel_override">
@@ -124,11 +123,37 @@
                             <div class="panel-body panel-body_override">
                                 <div class="image_area"><img src="images/uploads/thumb/th3.png" width="120" height="120"></div>
                                 <div class="prod_cont">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                                <button type="button" class="btn btn-default pnl_btn_override">Add to Cart</button>
+                                <button type="button" class="btn btn-default pnl_btn_override">Book Product</button>
                             </div>
                         </div>
+                        <div class="panel panel-default panel_override">
+                            <div class="pnl_heading"><h4>Heading 1</h4></div>
+                            <div class="panel-body panel-body_override">
+                                <div class="image_area"><img src="images/uploads/thumb/th1.jpg" width="120" height="120"></div>
+                                <div class="prod_cont">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                                <button type="button" class="btn btn-default pnl_btn_override">Book Product</button>
+                            </div>
+                        </div>
+                        <div class="panel panel-default panel_override">
+                            <div class="pnl_heading"><h4>Heading 2</h4></div>
+                            <div class="panel-body panel-body_override">
+                                <div class="image_area"><img src="images/uploads/thumb/th2.jpg" width="120" height="120"></div>
+                                <div class="prod_cont">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                                <button type="button" class="btn btn-default pnl_btn_override">Book Product</button>
+                            </div>
+                        </div>
+                        <div class="panel panel-default panel_override">
+                            <div class="pnl_heading"><h4>Heading 3</h4></div>
+                            <div class="panel-body panel-body_override">
+                                <div class="image_area"><img src="images/uploads/thumb/th3.png" width="120" height="120"></div>
+                                <div class="prod_cont">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                                <button type="button" class="btn btn-default pnl_btn_override">Book Product</button>
+                            </div>
+                        </div>
+
                         <span class="stretch"></span>
                     </div>
+                    <button type="button" class="btn btn-default btn_override_more">More Products <span>&raquo;</span></button>
                 </div>
                 <div class="footer">
                     <div class="footer_links">
