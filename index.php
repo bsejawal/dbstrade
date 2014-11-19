@@ -31,7 +31,9 @@
                         </div>
                     </div>
                     <ul>
-                        <li><a href="#" class="nav_link">HOME</a></li>
+                        <li><a href="#" class="nav_link" style="border-radius: 4px 0px 0px 4px;">HOME</a></li>
+                        <li><a href="#" class="nav_link">ABOUT US</a></li>
+                        <li><a href="#" class="nav_link">CONTACT</a></li>
                         <li><a href="#" onmouseover="javascript:menu_list_on()" onmouseout="javascript:menu_list_off()" class="nav_link" id="product">PRODUCTS</a>
                             <div class="menu_list" onmouseover="javascript:menu_list_on()" onmouseout="javascript:menu_list_off()">
                                 <div><a href="#">Herbs</a></div>   
@@ -41,8 +43,6 @@
                                 <div><a href="#">Spices</a></div> 
                             </div>
                         </li>
-                        <li><a href="#" class="nav_link">ABOUT US</a></li>
-                        <li><a href="#" class="nav_link">CONTACT</a></li>
                     </ul>
                 </nav>
                 <div class="sidebar_wrap">
