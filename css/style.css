@@ -11,6 +11,7 @@ body{
     width: 1000px;
     margin: 0 auto;
     background: #ccc;
+    box-shadow: 0px 0px 5px #aaa;
 }
 
 .wrap_site{
@@ -28,7 +29,6 @@ body{
 .logo_area{
     height: 100px;
     width: 200px;
-    /*background: #555;*/
     float: left;
 }
 
@@ -73,20 +73,16 @@ body{
     margin: 0 auto;
 }
 
-.navbar_override ul{
-    list-style: none;
-    float: left;
-    padding-top: 17px;
-}
-
 .navbar_override li{
-    display: block;
+    list-style: none;
+    padding-top: 17px;
     float: left;
 }
 
 .nav_link,.nav_link:visited,.nav_link:link{
+    outline: 0px;
     color: #fff;
-    padding: 18px 30px;
+    padding: 18px 30px 18px 30px;
     border: none;
     text-decoration: none;
 }
@@ -113,7 +109,7 @@ body{
 
 .btn_override{
     border: 1px solid #555;
-    /*background: #003399;*/
+    outline: 0px;
     background: rgba(0,150,150,1);
     color: #fff;
 }
@@ -141,6 +137,7 @@ body{
 }
 
 .menu_list a{
+    outline: 0px;
     color: #fff;
     display: block;
     width: 150px;
@@ -163,7 +160,7 @@ body{
 }
 
 .headings{
-    border-radius: 5px 5px 0px 0px;
+    border-radius: 4px 4px 0px 0px;
     background: #FF6600;
     padding: 8px;
     font-weight: bold;
@@ -185,6 +182,7 @@ body{
 
 .sidebar_buttons a{
     color: #000;
+    outline: 0px;
 }
 
 .content_wrap{
@@ -192,6 +190,7 @@ body{
     width: 700px;
     float: left;
     display: table-cell;
+    /*background: #fff;*/
 }
 
 .slideshow{
@@ -220,6 +219,7 @@ body{
 }
 
 #pager a.selected span {
+    outline: 0px;
     background: #ff6600;
 }
 #pager a {
@@ -239,9 +239,9 @@ body{
 
 .featured_products{
     margin-top: 20px;
-    text-align: justify;
-    -ms-text-justify: distribute-all-lines;
-    text-justify: distribute-all-lines;
+    /*    text-align: justify;
+        -ms-text-justify: distribute-all-lines;
+        text-justify: distribute-all-lines;*/
 }
 
 .featured_products h3{
@@ -250,11 +250,17 @@ body{
 }
 
 .panel_override{
-    width: 220px;
+    width: 221px;
+    /*width: 220px;*/
     height: 300px;
-    margin: 10px 0px 10px 0px;
-    display: inline-block;
+    /*display: inline-block;*/
+    margin: 7px 6px;
+
+    display: block;
+    float: left;
 }
+
+.panel_override:nth-child(3n+3) { margin-right: 0; }
 
 .pnl_heading{
     text-align: center;
@@ -273,6 +279,11 @@ body{
     height: 120px;
 }
 
+.prodImg{
+    width: 120px;
+    height: auto;
+}
+
 .prod_cont{
     text-align: center;
     height: 75px;
@@ -280,13 +291,14 @@ body{
 }
 
 .pnl_btn_override{
+    outline: 0px;
     margin-top: 10px;
     background: #ff6600;
     font-weight: bold;
     color: #fff;
 }
 
-.pnl_btn_override:hover{
+.pnl_btn_override:hover,.pnl_btn_override:focus{
     background: #003399;
     color: #fff;
 }
@@ -300,6 +312,7 @@ body{
 
 .btn_override_more{
     float: right;
+    outline: 0px;
     border-radius: 0px;
     border: none;
     margin-bottom: 15px;
@@ -308,8 +321,9 @@ body{
     color: #fff;
 }
 
-.btn_override_more:hover{
+.btn_override_more:hover,.btn_override_more:focus{
     background: #003399;
+    border: 0;
     color: #fff;
 }
 
@@ -338,4 +352,71 @@ body{
     color: #000;
 }
 
+.panel_login{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    height: 300px;
+    background: #E7E7E7;
+    box-shadow: 0px 0px 5px #aaa;
+}
 
+.input_wrap{
+    height: 250px;
+    width: 350px;
+    margin: 0px auto;
+}
+
+.input_wrap input{
+    margin-top: 30px;
+    border: 1px solid #aaa;
+    padding: 5px;
+    height: 40px;
+    position: relative;
+}
+
+.error_text{
+    margin-top: 15px;
+    height: 20px;
+    width: 100%;
+    color: #f00;
+}
+
+.btn_login_override{
+    outline: 0px;
+    padding: 10px 50px;
+    background: #ff6600;
+    border: 0px;
+    color: #fff;
+    display: block;
+    margin: 30px auto;
+}
+
+.btn_login_override:hover,.btn_login_override:focus{
+    background: #003399;
+    color: #fff;
+}
+
+.inner-addon { 
+    position: relative; 
+}
+
+.inner-addon .glyphicon {
+    position: absolute;
+    padding: 12px;
+    pointer-events: none;
+}
+
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
+.cont_about_contact{
+    margin: 20px 0px;
+    min-height: 600px;
+    max-height: 100%;
+}
