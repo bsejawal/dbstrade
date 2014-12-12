@@ -1,0 +1,98 @@
+-- phpMyAdmin SQL Dump
+-- version 4.1.4
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Dec 12, 2014 at 11:30 AM
+-- Server version: 5.6.15-log
+-- PHP Version: 5.5.8
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `dbstraders`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `info`
+--
+
+CREATE TABLE IF NOT EXISTS `info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `heading` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `content` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `keyword` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `metadata` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `type` (`keyword`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=20 ;
+
+--
+-- Dumping data for table `info`
+--
+
+INSERT INTO `info` (`id`, `heading`, `content`, `description`, `keyword`, `metadata`) VALUES
+(1, 'Contact Us', '<p><img alt="Map" src="http://localhost/ci/images/content/images/crysis_23-wallpaper-1366x768.jpg" style="border-style:solid; border-width:1px; float:left; height:112px; margin:0px 10px; width:200px" />Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas feugiat consequat diam. Maecenas metus. Vivamus diam purus, cursus a, commodo non, facilisis vitae, nulla. Aenean dictum lacinia tortor. Nunc iaculis, nibh non iaculis aliquam, orci felis euismod neque, sed ornare massa mauris sed velit. Nulla pretium mi et risus. Fusce mi pede, tempor id, cursus ac, ullamcorper nec, enim. Sed tortor. Curabitur molestie. Duis velit augue, condimentum at, ultrices a, luctus ut, orci. Donec pellentesque egestas eros. Integer cursus, augue in cursus faucibus, eros pede bibendum sem, in tempus tellus justo quis ligula. Etiam eget tortor. Vestibulum rutrum, est ut placerat elementum, lectus nisl aliquam velit, tempor aliquam eros nunc nonummy metus. In eros metus, gravida a, gravida sed, lobortis id, turpis. Ut ultrices, ipsum at venenatis fringilla, sem nulla lacinia tellus, eget aliquet turpis mauris non enim. Nam turpis. Suspendisse lacinia. Curabitur ac tortor ut ipsum egestas elementum. Nunc imperdiet gravida mauris.</p>\r\n', 'Contains everything about <strong>contact us</strong> page', 'contact', ''),
+(2, 'About Us', '<p>About Us Content</p>\r\n', 'Contains everything about <strong>About us</strong> page', 'about', 'awdsadsa'),
+(3, 'Copyright', '<p>Copyright&nbsp;&copy; 2015 DBS Trader Center. All Rights Reserved. Privacy and Terms.</p>\r\n', 'Contains footer information', 'copyright', ''),
+(13, 'Test', '<p>Test Content</p>\r\n', 'qwert', '', ''),
+(15, 'headin', '<p>cont</p>\r\n', 'desc', '0', ''),
+(18, 'q', '<p>a</p>\r\n', 'z', 'x', ''),
+(19, 'a', '<p>b</p>\r\n', 'c', 'd', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE IF NOT EXISTS `product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) NOT NULL,
+  `desc` varchar(200) NOT NULL,
+  `category` varchar(200) NOT NULL,
+  `imgPath` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`id`, `title`, `desc`, `category`, `imgPath`) VALUES
+(1, 'Iphone', '<p>This is an Apple Iphone.</p>\r\n', '', 'images/product/th3.png'),
+(2, 'Candle', '<p>This is a candle.</p>\r\n', '', 'images/product/72456-water-flame-fantasy01.jpg'),
+(3, 'Computer Cases', '<p>This is a computer case.</p>\r\n', '', 'images/product/th2.jpg'),
+(4, 'Sapphire Dual X R9 270', '<p>AMD&#39;s latest graphics card on the market.</p>\r\n', '', 'images/product/th1.jpg'),
+(5, 'Assassin''s Creed III', '<p>This is a PC game called Assassin&#39;s Creed III.</p>\r\n', '', 'images/product/assassins_creed_3_connor_bow-wallpaper-1366x768.jpg'),
+(6, 'Crysis 2', '<p>This is a Personal Computer Game.</p>\r\n', '', 'http://localhost/ci/images/product/crysis_2_video_game-wallpaper-1920x1080.jpg'),
+(7, 'Assassin''s Creed Unity', '<p>This is a PC game called Assassin&#39;s Creed Unity.</p>\r\n', '', 'http://localhost/ci/images/product/assassins_creed_unity-1920x1080.jpg'),
+(8, 'Darksiders 2', '<p>This is a PC Game called Darksiders 2.</p>\r\n', '', 'http://localhost/ci/images/product/darksiders_ii_3-wallpaper-1366x768.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_info`
+--
+
+CREATE TABLE IF NOT EXISTS `user_info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  `gender` varchar(30) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `password` varchar(30) NOT NULL,
+  `role` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `user_info`
+--
+
+INSERT INTO `user_info` (`id`, `name`, `gender`, `username`, `password`, `role`) VALUES
+(1, 'vinaya Dahal', 'male', 'vinaya', 'vinaya', 'dev'),
+(2, 'Vivek', 'male', 'vivek', 'vivek', 'admin');
