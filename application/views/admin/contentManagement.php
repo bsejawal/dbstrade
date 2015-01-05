@@ -3,6 +3,7 @@
     <div class="panel">
         <a href="home" style="outline: 0px;" title="Back"><i class="glyphicon glyphicon-circle-arrow-left back_btn"></i></a>
         <?php if ($role == 'dev') { ?><a href="addContent" style="outline: 0px;" title="Add"><i class="glyphicon glyphicon-plus-sign back_btn"></i></a><?php } ?>
+        <a href="showSlider"><button class="admin_edit_btn" style="float: right;">Manage Slider</button></a>
         <table class="table table-hover table_override_content">
             <tr>
                 <th width="20">S.No.</th>
@@ -16,7 +17,7 @@
                     <td><a href="editInfo?id=<?php echo $info['id']; ?>"><?php echo $info['heading']; ?></a></td>
                     <td><?php echo $info['description']; ?></td>
                     <td width="10"><a href="editInfo?id=<?php echo $info['id']; ?>" title="Edit"><i class="glyphicon glyphicon-list-alt glyphicon_list_override"></i></a></td>
-                    <?php if ($role == 'dev') { ?><td width="10"><a href="#" title="Delete"><i class="glyphicon glyphicon-remove glyphicon_delete_override"></i></a></td><?php } ?>
+                    <?php if ($role == 'dev') { ?><td width="10"><a href="deleteInfo?id=<?php echo $info['id']; ?>" title="Delete" onclick="return confirm('Are you sure?');"><i class="glyphicon glyphicon-remove glyphicon_delete_override"></i></a></td><?php } ?>
                 </tr>
             <?php } ?>
         </table>

@@ -1,15 +1,15 @@
 <?php if (!empty($name) || $title == 'Login') {
     ?>
-    </body>
     <nav class=" <?php
-    if ($title == 'Home' || $title == 'Login') {
+    if ($title == 'Home' || $title == 'Login' || $title == 'AddCategory' || $title == 'Settings' || $title == 'EditUser' || $title == 'EditPassword' || $title == 'EditCategory' || $title == 'ContentManagement' || $title == 'Category' || $title == 'EditSlider'||$title=='ShowSlider') {
         echo 'navbar navbar-default navbar-fixed-bottom';
-    }else{
+    } else {
         echo 'footerNormal';
     }
-    ?>">
+    ?>" style="z-index:0">
         <div class="footer_center"><?php echo $footerData; ?></div>
     </nav>
+    </body>
     </html>
 <?php } else {
     ?>

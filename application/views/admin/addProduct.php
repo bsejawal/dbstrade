@@ -3,10 +3,16 @@
     <a href="productManagement" style="outline: 0px;" title="Back"><i class="glyphicon glyphicon-circle-arrow-left back_btn"></i></a>
     <form method="POST" action="insertProduct" enctype="multipart/form-data">
         <label for="title"><h5>Title:</h5></label> <input id="title" type="text" class="form-control admin_editBox_override" name="titleProduct" />
+        <label for="desc"><h5>Category:</h5></label>
+        <select class="form-control selectOverride" name="category">
+            <?php foreach ($category as $type) { ?>
+                <option value="<?php echo $type['category']; ?>"><?php echo $type['category']; ?></option>
+            <?php } ?>
+        </select>
         <label for="desc"><h5>Description:</h5></label> <textarea id="desc" name="desc"></textarea>
-        <label for="img"><h5>Image:</h5></label>
+        <label for="img"><h5>Image:</h5> </label><img id='imgLocation' class='productImg' style="margin-bottom: 10px;">
         <div class="input-group">
-            <span class="btn btn-default btn-file">Browse <input type="file" name="imgFile"></span>
+            <span class="btn btn-default btn-file">Browse <input type="file" name="imgFile" id='img'></span>
         </div>
         <input type="submit" value="Add" class="admin_edit_btn" />
     </form>

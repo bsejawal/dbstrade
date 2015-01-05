@@ -4,7 +4,6 @@ class View extends CI_Controller {
 
     function __construct() {
         parent:: __construct();
-        $this->clear_cache();
         $this->load->database();
         $this->load->helper('url'); // Helps to get base url defined in config.php
     }
@@ -13,16 +12,23 @@ class View extends CI_Controller {
         if (!file_exists(APPPATH . '/views/' . $page . '.php') && $area == 'user') {
             show_404();
         }
-        if (!file_exists(APPPATH . '/views/admin/' . $page . '.php') && $area == 'admin') {
-            show_404();
-        }
     }
 
     public function index($page) {
+        $dataPerPage = 9;
         $this->checkFilepath($page, 'user');
+        $data['type'] = $this->getCategory();
         if ($page == 'home') {
-            $this->cleanUpThumb();
-            $data['productData'] = $this->getProduct();
+            $data['sliderImage'] = $this->get_image();
+            if (!empty($this->input->get('category'))) {
+                $data['searchResult'] = $this->checkAvail($this->input->get('category'), 'category');
+            } elseif (!empty($this->input->get('keyword'))) {
+                $data['search'] = $this->checkAvail($this->input->get('keyword'), 'search');
+            } else {
+                $data['productData'] = $this->getProduct($dataPerPage);
+                $totalData = $this->getAllCount();
+                $data['num_page'] = ceil($totalData / $dataPerPage);
+            }
         } elseif ($page == 'about') {
             $data['aboutData'] = $this->getAbout();
         } elseif ($page == 'contact') {
@@ -32,19 +38,143 @@ class View extends CI_Controller {
         $this->loadView_user($data, $page);
     }
 
-    public function getProduct() {
-        $this->load->model('getProduct');
-        $prodData = $this->getProduct->products(); // calling model
-        foreach ($prodData as $Product) {
-            $thumbPath = $this->createThumbnail($Product->imgPath);
-            $info[] = array('id' => $Product->id, 'title' => $Product->title, 'desc' => $Product->desc, 'imgPath' => base_url() . $thumbPath);
+    public function get_image() {
+        $files = scandir('images/slideShow/');
+        foreach ($files as $file) {
+            if ($file == '.' || $file == '..') {
+                continue;
+            } else {
+                $filePath[] = $file;
+            }
+        }
+        if (!empty($filePath)) {
+            return $filePath;
+        } else {
+            return false;
+        }
+    }
+
+    public function passGen() {
+        echo sha1($this->input->post('password'));
+    }
+
+    public function search($keyword) {
+        $this->load->model('get');
+        $result = $this->get->searchAll($keyword);
+        foreach ($result as $Product) {
+            $status = $this->checkThumb($Product->imgPath);
+            if (empty($status)) {
+                $thumbPath = $this->createThumbnail($Product->imgPath);
+            } else {
+                $thumbPath = $status;
+            }
+            $info[] = array('keyword' => $keyword, 'id' => $Product->id, 'title' => $Product->title, 'category' => $Product->category, 'desc' => $Product->desc, 'imgPath' => base_url() . $thumbPath);
+        }
+        if (!empty($info)) {
+            return $info;
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function checkAvail($category, $show) {
+        if ($show == 'search') {
+            if ($this->search($category)) {
+                return $this->search($category);
+            } else {
+                return $category;
+            }
+        } else {
+            if ($this->searchProduct($category)) {
+                return $this->searchProduct($category);
+            } else {
+                return $category;
+            }
+        }
+    }
+
+    public function searchProduct($category) {
+        $this->load->model('get');
+        $searchData = $this->get->searchProduct($category);
+        foreach ($searchData as $Product) {
+            $status = $this->checkThumb($Product->imgPath);
+            if (empty($status)) {
+                $thumbPath = $this->createThumbnail($Product->imgPath);
+            } else {
+                $thumbPath = $status;
+            }
+            $info[] = array('id' => $Product->id, 'title' => $Product->title, 'category' => $Product->category, 'desc' => $Product->desc, 'imgPath' => base_url() . $thumbPath);
+        }
+        if (!empty($info)) {
+            return $info;
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function getCategory() {
+        $this->load->model('get');
+        $totalData = $this->get->getCategory();
+        foreach ($totalData as $finalInfo) {
+            $info[] = array('category' => $finalInfo->category);
         }
         return $info;
     }
 
+    public function getProduct($dataPerPage) {
+        $this->load->model('get');
+        if (!empty($this->input->get('page'))) {
+            $page = $this->input->get('page');
+        } else {
+            $page = 1;
+        }
+        $prodData = $this->get->getProduct($page, $dataPerPage); // calling model
+        if ($page > 1) {
+            $i = (($page - 1) * $dataPerPage) + 1;
+        } else {
+            $i = 1;
+        }
+        foreach ($prodData as $Product) {
+            $status = $this->checkThumb($Product->imgPath);
+            if (empty($status)) {
+                $thumbPath = $this->createThumbnail($Product->imgPath);
+            } else {
+                $thumbPath = $status;
+            }
+            $info[] = array('page' => $page, 'id' => $Product->id, 'title' => $Product->title, 'desc' => $Product->desc, 'imgPath' => base_url() . $thumbPath);
+        }
+        return $info;
+    }
+
+    public function getReadMore() {
+        $id = $this->input->get('id');
+        $this->load->model('get');
+        $readMoreData = $this->get->prodReadMore($id);
+        foreach ($readMoreData as $readMore) {
+            $title = $readMore->title;
+            $desc = $readMore->desc;
+            $imgPath = $readMore->imgPath;
+        }
+        include APPPATH . '/views/templates/readMore.php';
+    }
+
+    public function getBookPanel() {
+        include APPPATH . '/views/templates/bookPanel.php';
+    }
+
+    public function sendRequest() {
+        echo 'Now request will be sent';
+    }
+
+    public function getAllCount() {
+        $this->load->model('get');
+        $totalData = count($this->get->allData('product')); // calling model
+        return $totalData;
+    }
+
     public function getAbout() {
-        $this->load->model('getAbout');
-        $aboutData = $this->getAbout->getContent(); // calling model
+        $this->load->model('get');
+        $aboutData = $this->get->getAbout(); // calling model
         foreach ($aboutData as $aboutInfo) {
             $info[] = array('heading' => $aboutInfo->heading, 'content' => $aboutInfo->content);
         }
@@ -52,8 +182,8 @@ class View extends CI_Controller {
     }
 
     public function getContact() {
-        $this->load->model('getContact');
-        $contactData = $this->getContact->getContent(); // calling model
+        $this->load->model('get');
+        $contactData = $this->get->getContact(); // calling model
         foreach ($contactData as $contactInfo) {
             $info[] = array('heading' => $contactInfo->heading, 'content' => $contactInfo->content);
         }
@@ -67,158 +197,30 @@ class View extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
-    public function getFlashdata() {
-        $this->load->library('session'); // something like session start
-        $error = $this->session->flashdata('error');
-        $success = $this->session->flashdata('success');
-        if (!empty($error)) { // pulls data before redirect and checks for login error
-            $status = array('error', $error);
-            return $status;
-        }
-        if (!empty($success)) {
-            $status = array('ok', $success);
-            return $status;
-        }
-    }
-
-    public function checkAccess() {
-        $this->load->library('session'); // something like session start
-        $status = $this->session->userdata('username'); // gets session data
-        if (!empty($status)) {
-            return $status;
-        } else {
-            redirect('login', 'refresh');
-        }
-    }
-
-    public function admin($page) {
-        $dataPerPage = 10;
-        $this->checkFilepath($page, 'admin');
-        if ($this->getFlashdata()) {
-            $data['flashData'] = $this->getFlashdata();
-        }
-        if ($page != 'login') {
-            $data['username'] = $this->checkAccess();
-            $data['name'] = $this->session->userdata('name');
-            $data['gender'] = $this->session->userdata('gender');
-            $data['role'] = $this->session->userdata('role');
-        }
-        if ($page == 'editInfo') {
-            $editData = $this->editContent($this->input->get('id'));
-            $data['id'] = $editData[0];
-            $data['heading'] = $editData[1];
-            $data['content'] = $editData[2];
-        }
-        if ($page == 'contentManagement') {
-            $data['getInfo'] = $this->getInfo($dataPerPage);
-            $totalData = $this->getContPage();
-            $data['num_pages'] = ceil($totalData / $dataPerPage);
-        }
-        if ($page == 'productManagement') {
-            $data['Product'] = $this->getProductInfo($dataPerPage);
-            $totalData = $this->getProdPage();
-            $data['num_pages'] = ceil($totalData / $dataPerPage);
-        }
-        if ($page == 'editProdInfo') {
-            $editData = $this->editProduct($this->input->get('id'));
-            $data['id'] = $editData[0];
-            $data['prodTitle'] = $editData[1];
-            $data['desc'] = $editData[2];
-            $data['imgPath'] = base_url() . $editData[3];
-            $data['mainPath'] = $editData[4];
-        }
-        $data['footerData'] = $this->getFooter();
-        $this->loadView($data, $page);
-    }
-
     public function getFooter() {
-        $this->load->model('getFooter');
-        $footerData = $this->getFooter->getContent(); // calling model
+        $this->load->model('get');
+        $footerData = $this->get->getFooter(); // calling model
         foreach ($footerData as $footerInfo) {
             $info = $footerInfo->content;
         }
         return $info;
     }
 
-    public function getInfo($dataPerPage) {
-        $this->load->model('getInfo');
-        if (!empty($this->input->get('page'))) {
-            $page = $this->input->get('page');
-        } else {
-            $page = 1;
+    public function checkThumb($imgPath) {
+        $files = scandir('images/thumb/');
+        foreach ($files as $file) {
+            if ($file == '.' || $file == '..') {
+                continue;
+            } elseif ($file == basename($imgPath)) {
+                return 'images/thumb/' . basename($imgPath);
+            } else {
+                continue;
+            }
         }
-        $infoData = $this->getInfo->info($page, $dataPerPage); // calling model
-        if ($page > 1) {
-            $i = (($page - 1) * $dataPerPage) + 1;
-        } else {
-            $i = 1;
-        }
-        foreach ($infoData as $getInfo) {
-            $info[] = array('sn' => $i++, 'id' => $getInfo->id, 'heading' => $getInfo->heading, 'content' => $getInfo->content, 'description' => $getInfo->description);
-        }
-        return $info;
+        return NULL;
     }
 
-    public function getContPage() {
-        $this->load->model('getInfo');
-        $totalData = count($this->getInfo->allData()); // calling model
-        return $totalData;
-    }
-
-    public function getProductInfo($dataPerPage) {
-        $this->load->model('getProductInfo');
-        $this->cleanUpThumb();
-        if (!empty($this->input->get('page'))) {
-            $page = $this->input->get('page');
-        } else {
-            $page = 1;
-        }
-        $productInfo = $this->getProductInfo->product($page, $dataPerPage); // calling model
-        if ($page > 1) {
-            $i = (($page - 1) * $dataPerPage) + 1;
-        } else {
-            $i = 1;
-        }
-        foreach ($productInfo as $getProduct) {
-            $imgPath = $getProduct->imgPath;
-            $thumbPath = $this->createThumbnail($imgPath);
-            $info[] = array('sn' => $i++, 'id' => $getProduct->id, 'title' => $getProduct->title, 'desc' => $getProduct->desc, 'imgPath' => base_url() . $thumbPath);
-        }
-        return $info;
-    }
-
-    public function getProdPage() {
-        $this->load->model('getProductInfo');
-        $totalData = count($this->getProductInfo->allData()); // calling model
-        return $totalData;
-    }
-
-    public function editContent($id) {
-        $this->load->model('getId');
-        $contactData = $this->getId->content($id); // calling model
-        foreach ($contactData as $contactInfo) {
-            $id = $contactInfo->id;
-            $heading = $contactInfo->heading;
-            $content = $contactInfo->content;
-        }
-        return array($id, $heading, $content);
-    }
-
-    public function editProduct($id) {
-        $this->load->model('getProdId');
-        $prodData = $this->getProdId->content($id); // calling model
-        foreach ($prodData as $prodInfo) {
-            $id = $prodInfo->id;
-            $prodTitle = $prodInfo->title;
-            $desc = $prodInfo->desc;
-            $mainPath = $prodInfo->imgPath;
-            $this->cleanUpThumb();
-            $thumbPath = $this->createThumbnail($mainPath);
-        }
-        return array($id, $prodTitle, $desc, $thumbPath, $mainPath);
-    }
-
-    public function createThumbnail($imgPath) {
+    public function getMime($imgPath) {
         $mime = getimagesize($imgPath);
         if ($mime['mime'] == 'image/png') {
             $src_img = imagecreatefrompng($imgPath);
@@ -229,6 +231,13 @@ class View extends CI_Controller {
         } elseif ($mime['mime'] == 'image/pjpeg') {
             $src_img = imagecreatefromjpeg($imgPath);
         }
+        return array($src_img, $mime);
+    }
+
+    public function createThumbnail($imgPath) {
+        $data = $this->getMime($imgPath);
+        $src_img = $data[0];
+        $mime = $data[1];
         $img_width = imageSX($src_img);
         $img_height = imageSY($src_img);
         $new_size = ($img_width + $img_height) / ($img_width * ($img_height / 60));
@@ -262,18 +271,6 @@ class View extends CI_Controller {
         $this->load->view('templates/header', $data);
         $this->load->view('admin/' . $page);
         $this->load->view('templates/footer', $data);
-    }
-
-    public function cleanUpThumb() {
-        $files = glob('images/thumb/*'); // get all file names
-        foreach ($files as $file) { // iterate files
-            unlink($file); // delete file
-        }
-    }
-
-    function clear_cache() { // this fucntion clears browser cache to prevent reloging into system after logout
-        $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
-        $this->output->set_header("Pragma: no-cache");
     }
 
 }

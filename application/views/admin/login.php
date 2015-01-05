@@ -1,6 +1,6 @@
 <div class="panel panel_login">
     <div class="headings">
-        <h4>SECURE LOGIN</h4>
+        <h4>Secure Login - DBS Traders</h4>
     </div>
     <div class="input_wrap">
         <form action="checkLogin" method="POST">

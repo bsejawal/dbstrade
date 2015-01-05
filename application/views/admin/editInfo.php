@@ -1,5 +1,5 @@
 <div class="admin_edit_center">
-    <h3>Edit Contact Information</h3>
+    <h3>Edit Information</h3>
     <a href="contentManagement" style="outline: 0px;" title="Back"><i class="glyphicon glyphicon-circle-arrow-left back_btn"></i></a>
     <form method="POST" action="editContent">
         <input type="hidden" name="contentId" value="<?php echo $id; ?>">

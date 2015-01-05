@@ -10,7 +10,7 @@ body{
 .site_center{
     width: 1000px;
     margin: 0 auto;
-    background: #ccc;
+    background: #d8d8d8;
     box-shadow: 0px 0px 5px #aaa;
 }
 
@@ -88,7 +88,8 @@ body{
 }
 
 .nav_link:hover{
-    background: #003399;
+    /*background: #003399;*/
+    color: #003399;
 }
 
 #active{
@@ -172,6 +173,10 @@ body{
     margin-bottom: 45px;
 }
 
+.fb-like-box{
+    background: #eef;
+}
+
 .sidebar_buttons{
     font-size: 15px;
     color: #000;
@@ -190,7 +195,6 @@ body{
     width: 700px;
     float: left;
     display: table-cell;
-    /*background: #fff;*/
 }
 
 .slideshow{
@@ -251,11 +255,8 @@ body{
 
 .panel_override{
     width: 221px;
-    /*width: 220px;*/
     height: 300px;
-    /*display: inline-block;*/
     margin: 7px 6px;
-
     display: block;
     float: left;
 }
@@ -285,6 +286,8 @@ body{
 }
 
 .prod_cont{
+    margin: 0 auto;
+    width: 200px;
     text-align: center;
     height: 75px;
     padding: 10px 0px;
@@ -332,6 +335,24 @@ body{
     font-weight: normal;
 }
 
+#paginationOverride,#paginationOverrideDisable{
+    font-size: 25px;
+    text-align: center;
+    height: 40px;
+    width: 35px;
+    padding: 0px;
+    background: #FF6600;
+    border-color:#d5d5d5;
+    color:#fff;
+}
+
+#paginationOverride:hover{
+    background: #003399;
+}
+
+#paginationOverrideDisable{
+    background: #FF8800;
+}
 
 .footer{
     border-top: 1px solid #fff;
@@ -416,7 +437,78 @@ body{
 .right-addon input { padding-right: 30px; }
 
 .cont_about_contact{
-    margin: 20px 0px;
     min-height: 600px;
     max-height: 100%;
+    /*background: #e8e8e8;*/
+    padding: 10px;
+}
+
+.about_contact_heading h3{
+    /*text-align: center;*/
+    margin: 0px;
+    padding: 10px 10px;
+}
+
+.popupBackground{
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    display: none;
+}
+
+.popup{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    display: none;
+}
+
+.popupContent{
+    overflow: auto;
+    background: #fff;
+    width: 800px;
+    height: 500px;
+
+}
+
+.popupCenter{
+    width: 700px;
+    margin: 0 auto;
+}
+
+.close_btn,.close_btn:active,.close_btn:link{
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    float: right;
+    padding: 2px 5px;
+    text-align: center;
+    font-weight: bold;
+    outline: none;
+}
+
+.close_btn:hover{
+    text-decoration: none;
+    color: #ccc;
+}
+
+.readMoreContent{
+    margin: 0 auto;
+    text-align: justify;
+    background: #e8e8e8;
+    padding: 10px;
+    display: table;
+}
+
+.readMoreImage{
+    width: 400px;
+    float: left;
+    display: table-cell;
+    background: #ccc;
+    margin-right: 10px;
 }

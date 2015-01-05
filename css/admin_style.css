@@ -26,6 +26,10 @@
     margin-top: 15px;
 }
 
+.selectOverride{
+    width: 200px;
+}
+
 .logout_box{
     position: fixed;
     top: 33px;
@@ -195,4 +199,28 @@
     color: #555;
     margin-top: 15px;
     text-align: center;
+}
+
+.iconSilder{
+    float: left;
+    width: 200px;
+    background: #ccc;
+}
+
+.sliderPreview{
+    width: 202px;
+    height: auto;
+    float: left;
+    margin: 22px 9px 0px 9px;
+    border: 1px solid #aaa;
+}
+
+.sliderPreview:hover{
+    border: 1px solid #e8e8e8;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+#browseBtn{
+    display: none;
 }
