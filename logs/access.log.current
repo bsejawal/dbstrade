@@ -1,0 +1,6 @@
+66.249.67.4 - - [14/Sep/2015:05:58:01 -0400] "GET /robots.txt HTTP/1.1" 200 209 www.bhesh.org "-" "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" "-"
+66.249.67.125 - - [14/Sep/2015:05:58:01 -0400] "GET / HTTP/1.1" 200 209 www.bhesh.org "-" "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" "-"
+202.166.207.89 - - [14/Sep/2015:05:59:11 -0400] "GET / HTTP/1.1" 200 209 bhesh.org "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.125 Safari/537.36" "-"
+202.166.207.89 - - [14/Sep/2015:05:59:12 -0400] "GET /favicon.ico HTTP/1.1" 200 209 bhesh.org "http://bhesh.org/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.125 Safari/537.36" "-"
+202.166.207.89 - - [14/Sep/2015:05:59:20 -0400] "GET / HTTP/1.1" 200 209 dbstradecentre.com.np "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.125 Safari/537.36" "-"
+202.166.207.89 - - [14/Sep/2015:05:59:21 -0400] "GET /favicon.ico HTTP/1.1" 200 209 dbstradecentre.com.np "http://dbstradecentre.com.np/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.125 Safari/537.36" "-"

@@ -9,16 +9,26 @@ class get extends CI_Model {
         return $query->result();
     }
 
-    public function getUserInfo($id) {
-        $this->db->select('name, gender, username, password, role');
+    public function getUserInfo($id = Null, $mailTo = Null) {
+        $this->db->select('name, email, gender, username, password, role, mailTo');
         $this->db->from('user_info');
-        $this->db->where('id', $id);
-        $this->db->limit(1);
-        $query = $this->db->get();
-        if ($query->num_rows() == 1) {
-            return $query->result();
+        if ($mailTo != NULL) {
+            $this->db->where('mailTo', $mailTo);
+            $query = $this->db->get();
+            if ($query) {
+                return $query->result();
+            } else {
+                return false;
+            }
         } else {
-            return false;
+            $this->db->where('id', $id);
+            $this->db->limit(1);
+            $query = $this->db->get();
+            if ($query->num_rows() == 1) {
+                return $query->result();
+            } else {
+                return false;
+            }
         }
     }
 
@@ -52,7 +62,7 @@ class get extends CI_Model {
     }
 
     function prodReadMore($id) {
-        $this->db->select('title, desc, imgPath');
+        $this->db->select('id, title, desc, imgPath');
         $this->db->from('product');
         $this->db->where('id', $id);
         $this->db->limit(1);

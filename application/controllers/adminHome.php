@@ -68,10 +68,12 @@ class adminHome extends CI_Controller {
     public function getFooter() {
         $this->load->model('get');
         $footerData = $this->get->getFooter(); // calling model
-        foreach ($footerData as $footerInfo) {
-            $info = $footerInfo->content;
+        if (!empty($footerData)) {
+            foreach ($footerData as $footerInfo) {
+                $info = $footerInfo->content;
+            }
+            return $info;
         }
-        return $info;
     }
 
     public function loadView($data, $page) {

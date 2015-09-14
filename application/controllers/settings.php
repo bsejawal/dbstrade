@@ -62,7 +62,7 @@ class settings extends CI_Controller {
         $this->load->model('get');
         $userData = $this->get->getUserInfo($id); // calling model
         foreach ($userData as $userInfo) {
-            $info = array('name' => $userInfo->name, 'gender' => $userInfo->gender, 'username' => $userInfo->username, 'password' => $userInfo->password, 'role' => $userInfo->role);
+            $info = array('name' => $userInfo->name, 'email' => $userInfo->email, 'gender' => $userInfo->gender, 'username' => $userInfo->username, 'password' => $userInfo->password, 'role' => $userInfo->role);
         }
         return $info;
     }
@@ -73,6 +73,7 @@ class settings extends CI_Controller {
             $data['id'] = $this->checkAccess();
             $userData = $this->getUserInfo($data['id']);
             $data['name'] = $userData['name'];
+            $data['email'] = $userData['email'];
             $data['username'] = $userData['username'];
             $data['gender'] = $userData['gender'];
             $data['role'] = $userData['role'];
@@ -85,9 +86,10 @@ class settings extends CI_Controller {
         $this->load->model('update');
         $userId = $this->input->post('userId');
         $name = $this->input->post('name');
+        $email = $this->input->post('email');
         $gender = $this->input->post('gender');
         $username = $this->input->post('username');
-        $updateData = $this->update->updateUser($userId, $name, $gender, $username);
+        $updateData = $this->update->updateUser($userId, $name, $email, $gender, $username);
         if (!empty($updateData)) {
             $this->session->set_flashdata('success', 'Record Updated');
             $this->clear_cache();

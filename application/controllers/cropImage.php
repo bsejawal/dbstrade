@@ -123,13 +123,13 @@ class cropImage extends CI_Controller {
             $result = imagepng($new_image, $new_file_path, 9);
         }
         if ($mime['mime'] == 'image/jpg') {
-            $result = imagejpeg($new_image, $new_file_path, 90);
+            $result = imagejpeg($new_image, $new_file_path, 100);
         }
         if ($mime['mime'] == 'image/jpeg') {
-            $result = imagejpeg($new_image, $new_file_path, 90);
+            $result = imagejpeg($new_image, $new_file_path, 100);
         }
         if ($mime['mime'] == 'image/pjpeg') {
-            $result = imagejpeg($new_image, $new_file_path, 90);
+            $result = imagejpeg($new_image, $new_file_path, 100);
         }
         if ($path == 'slide') {
             $this->session->set_flashdata('success', 'Image crop successful');

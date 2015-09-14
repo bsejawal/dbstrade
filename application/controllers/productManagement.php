@@ -167,7 +167,11 @@ class productManagement extends CI_Controller {
         foreach ($totalData as $finalInfo) {
             $info[] = array('category' => $finalInfo->category);
         }
-        return $info;
+        if (!empty($info)) {
+            return $info;
+        } else {
+            return FALSE;
+        }
     }
 
     public function getProductInfo($dataPerPage) {
@@ -192,7 +196,11 @@ class productManagement extends CI_Controller {
             }
             $info[] = array('sn' => $i++, 'id' => $getProduct->id, 'title' => $getProduct->title, 'category' => $getProduct->category, 'desc' => $getProduct->desc, 'imgPath' => base_url() . $thumbPath);
         }
-        return $info;
+        if (!empty($info)) {
+            return $info;
+        } else {
+            return FALSE;
+        }
     }
 
     public function getProdPage() {
@@ -325,7 +333,7 @@ class productManagement extends CI_Controller {
         $mime = $data [1];
         $img_width = imageSX($src_img);
         $img_height = imageSY($src_img);
-        $new_size = ($img_width + $img_height) / ( $img_width * ($img_height / 60));
+        $new_size = ($img_width + $img_height) / ( $img_width * ($img_height / 200));
         $img_width_new = $img_width * $new_size;
         $img_height_new = $img_height * $new_size;
         $new_image = ImageCreateTrueColor($img_width_new, $img_height_new);

@@ -1,9 +1,9 @@
 <div class="admin_edit_center">
     <h3>Edit Product Information</h3>
     <a href="productManagement" style="outline: 0px;" title="Back"><i class="glyphicon glyphicon-circle-arrow-left back_btn"></i></a>
-    <form method="POST" action="editProduct" enctype="multipart/form-data">
+    <form method="POST" action="editProduct" enctype="multipart/form-data" onsubmit="return countChars();">
         <input type="hidden" name="contentId" value="<?php echo $id; ?>">
-        <label for="heading"><h5>Title:</h5></label> <input id="heading" type="text" class="form-control admin_editBox_override" name="title" value="<?php echo $prodTitle; ?>">
+        <label for="title"><h5>Title:</h5></label> <input id="title" type="text" class="form-control admin_editBox_override" name="title" value="<?php echo $prodTitle; ?>">
         <label for="desc"><h5>Category:</h5></label>
         <select class="form-control selectOverride" name="category">
             <?php

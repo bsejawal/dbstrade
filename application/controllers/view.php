@@ -4,7 +4,9 @@ class View extends CI_Controller {
 
     function __construct() {
         parent:: __construct();
+        $this->clear_cache();
         $this->load->database();
+        $this->load->library('session'); // something like session start
         $this->load->helper('url'); // Helps to get base url defined in config.php
     }
 
@@ -14,7 +16,23 @@ class View extends CI_Controller {
         }
     }
 
+    public function getFlashdata() {
+        $error = $this->session->flashdata('error');
+        $success = $this->session->flashdata('success');
+        if (!empty($error)) { // pulls data before redirect and checks for login error
+            $status = array('error', $error);
+            return $status;
+        }
+        if (!empty($success)) {
+            $status = array('ok', $success);
+            return $status;
+        }
+    }
+
     public function index($page) {
+        if ($this->getFlashdata()) {
+            $data['flashData'] = $this->getFlashdata();
+        }
         $dataPerPage = 9;
         $this->checkFilepath($page, 'user');
         $data['type'] = $this->getCategory();
@@ -36,6 +54,43 @@ class View extends CI_Controller {
         }
         $data['footerData'] = $this->getFooter();
         $this->loadView_user($data, $page);
+    }
+
+    public function sendRequest() {
+        $this->load->library('email');
+        $this->load->model('get');
+        $userData = $this->get->getUserInfo($id = NULL, 'yes'); // calling model
+        foreach ($userData as $userInfo) {
+            $email[] = $userInfo->email;
+        }
+        $to = implode(",", $email);
+        $subject = 'Product Request';
+        $message = '<table width="500px" cellspacing="0" border="1" style="font-size:15px">
+            <tr>
+                <td>Customer Name:</td>
+                <td>' . $this->input->post('name') . '</td>
+            </tr>
+            <tr>
+                <td>Contact Information:</td>
+                <td>' . $this->input->post('contact') . '</td>
+            </tr>
+            <tr>
+                <td>Request:</td>
+                <td>' . $this->input->post('request') . '</td>
+            </tr>
+            <tr>
+                <td>Product Name:</td>
+                <td>' . $this->input->post('product') . '</td>
+            </tr>
+            </table>';
+        $headers = 'From: DBSTradeCentre' . "\r\n" . "Content-type: text/html; charset=iso-8859-1\r\n";
+        if (mail($to, $subject, $message, $headers)) {
+            $this->session->set_flashdata('success', 'Message was sent successfully');
+            redirect('home', 'refresh');
+        } else {
+            $this->session->set_flashdata('error', 'Message could not be sent');
+            redirect('home', 'refresh');
+        }
     }
 
     public function get_image() {
@@ -118,7 +173,11 @@ class View extends CI_Controller {
         foreach ($totalData as $finalInfo) {
             $info[] = array('category' => $finalInfo->category);
         }
-        return $info;
+        if (!empty($info)) {
+            return $info;
+        } else {
+            return FALSE;
+        }
     }
 
     public function getProduct($dataPerPage) {
@@ -143,7 +202,11 @@ class View extends CI_Controller {
             }
             $info[] = array('page' => $page, 'id' => $Product->id, 'title' => $Product->title, 'desc' => $Product->desc, 'imgPath' => base_url() . $thumbPath);
         }
-        return $info;
+        if (!empty($info)) {
+            return $info;
+        } else {
+            return FALSE;
+        }
     }
 
     public function getReadMore() {
@@ -151,6 +214,7 @@ class View extends CI_Controller {
         $this->load->model('get');
         $readMoreData = $this->get->prodReadMore($id);
         foreach ($readMoreData as $readMore) {
+            $prodId = $readMore->id;
             $title = $readMore->title;
             $desc = $readMore->desc;
             $imgPath = $readMore->imgPath;
@@ -159,11 +223,13 @@ class View extends CI_Controller {
     }
 
     public function getBookPanel() {
+        $id = $this->input->get('id');
+        $this->load->model('get');
+        $readMoreData = $this->get->prodReadMore($id);
+        foreach ($readMoreData as $readMore) {
+            $title = $readMore->title;
+        }
         include APPPATH . '/views/templates/bookPanel.php';
-    }
-
-    public function sendRequest() {
-        echo 'Now request will be sent';
     }
 
     public function getAllCount() {
@@ -240,7 +306,7 @@ class View extends CI_Controller {
         $mime = $data[1];
         $img_width = imageSX($src_img);
         $img_height = imageSY($src_img);
-        $new_size = ($img_width + $img_height) / ($img_width * ($img_height / 60));
+        $new_size = ($img_width + $img_height) / ($img_width * ($img_height / 200));
         $img_width_new = $img_width * $new_size;
         $img_height_new = $img_height * $new_size;
         $new_image = ImageCreateTrueColor($img_width_new, $img_height_new);
@@ -271,6 +337,11 @@ class View extends CI_Controller {
         $this->load->view('templates/header', $data);
         $this->load->view('admin/' . $page);
         $this->load->view('templates/footer', $data);
+    }
+
+    public function clear_cache() { // this fucntion clears browser cache to prevent reloging into system after logout
+        $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
+        $this->output->set_header("Pragma: no-cache");
     }
 
 }

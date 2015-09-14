@@ -48,10 +48,11 @@ Class update extends CI_Model {
         }
     }
 
-    function updateUser($userId, $name, $gender, $username) {
+    function updateUser($userId, $name, $email, $gender, $username) {
         $data = array(
             'id' => $userId,
             'name' => $name,
+            'email' => $email,
             'gender' => $gender,
             'username' => $username
         );
